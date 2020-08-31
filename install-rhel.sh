@@ -77,7 +77,7 @@ make && make install
 cd ../../httpd-2.4.43/
 
 echo Installing HTTPD
-./configure --prefix=/usr/local/apache24 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl=/usr/local/openssl-1.1.1g --with-apr=/usr/local/apache/apr --with-apr-util=/usr/local/apache/apr-util
+./configure --prefix=/usr/local/apache24 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache/apr --with-apr-util=/usr/local/apache/apr-util
 make && make install
 cd ../
 
