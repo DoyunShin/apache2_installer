@@ -3,7 +3,7 @@ cd work-apache2-inst
 rm -rf ./*
 echo Updating Build Tools / Dists
 yum groupinstall "Development Tools" -y
-yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 -y
+yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 python3-devel -y
 echo Downloading httpd-2.4.43
 curl -LO http://archive.apache.org/dist/httpd/httpd-2.4.43.tar.gz
 tar xvzf httpd-2.4.43.tar.gz
@@ -82,3 +82,11 @@ make && make install
 cd ../
 
 ln -s /usr/local/apache24/bin/httpd /usr/local/bin/httpd
+
+cd plugin
+curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/4.7.1.tar.gz
+tar xvzf 4.7.1.tar.gz
+cd mod_wsgi-4.7.1
+./configure --with-apxs=/usr/local/apache24/bin/apxs --with-python=$(which python3)
+make && make install
+cd ../../
