@@ -2,7 +2,7 @@ mkdir work-apache2-inst
 cd work-apache2-inst
 rm -rf ./*
 apt update
-apt install make gcc g++ libpcre3-dev libexpat1-dev build-essential zlib1g zlib1g-dev openssl m4 python3-dev -y
+apt install make gcc g++ libpcre3-dev libexpat1-dev build-essential zlib1g zlib1g-dev openssl m4 python3-dev gnulib -y
 curl -LO http://archive.apache.org/dist/httpd/httpd-2.4.43.tar.gz
 tar xvzf httpd-2.4.43.tar.gz
 mkdir plugin
