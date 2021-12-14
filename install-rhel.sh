@@ -38,6 +38,8 @@ cd ../
 
 ln -s /usr/local/apache2/bin/httpd /usr/local/bin/httpd
 ln -s /usr/local/apache2 /httpd
+mv /usr/local/apache2/htdocs /var/www
+ln -s /var/www /usr/local/apache2/htdocs
 
 cd plugin
 curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.0.tar.gz
