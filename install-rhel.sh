@@ -4,9 +4,9 @@ rm -rf ./*
 echo Updating Build Tools / Dists
 yum groupinstall "Development Tools" -y
 yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 python3-devel -y
-echo Downloading httpd-2.4.51
-curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.51.tar.gz
-tar xvzf httpd-2.4.51.tar.gz
+echo Downloading httpd-2.4.52
+curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.52.tar.gz
+tar xvzf httpd-2.4.52.tar.gz
 
 echo Downloading plugins
 mkdir plugin
@@ -29,7 +29,7 @@ cd ../apr-util-1.6.1
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make && make install
-cd ../../httpd-2.4.51/
+cd ../../httpd-2.4.52/
 
 echo Installing HTTPD
 ./configure --prefix=/usr/local/apache2 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache2 --with-apr-util=/usr/local/apache2
