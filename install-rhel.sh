@@ -4,8 +4,8 @@ rm -rf ./*
 echo Updating Build Tools / Dists
 yum groupinstall "Development Tools" -y
 yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 python3-devel -y
-echo Downloading httpd-2.4.52
-curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.53.tar.gz
+echo Downloading httpd-2.4.54
+curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz
 tar xvzf httpd-2.4.53.tar.gz
 
 echo Downloading plugins
