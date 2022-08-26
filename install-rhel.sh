@@ -25,14 +25,13 @@ tar xvzf httpd-2.4.54.tar.gz
 echo Downloading plugins
 mkdir plugin
 cd plugin
-curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz &
-curl -LO https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz
+curl -LO https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz &
+curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz
 fg
 
 echo Unzipping Plugins
-tar xvzf apr-util-1.6.1.tar.gz &
-tar xvzf apr-1.7.0.tar.gz
-
+tar xvzf apr-1.7.0.tar.gz &
+tar xvzf apr-util-1.6.1.tar.gz
 fg
 
 echo Installing Plugins
