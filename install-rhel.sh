@@ -1,3 +1,10 @@
+if [ -f /etc/redhat-release ]; then
+    echo "Starting for RHEL system"
+else
+    echo "Unsupported OS"
+    exit 1
+fi
+
 THREADS=$(nproc)
 
 mkdir work-apache2-inst
