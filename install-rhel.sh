@@ -1,4 +1,4 @@
-THREADS=$(grep -c ^processor /proc/cpuinfo)
+THREADS=$(nproc)
 
 mkdir work-apache2-inst
 cd work-apache2-inst
