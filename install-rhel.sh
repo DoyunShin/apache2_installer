@@ -5,7 +5,12 @@ cd work-apache2-inst
 rm -rf ./*
 echo Updating Build Tools / Dists
 yum groupinstall "Development Tools" -y
-yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 python3-devel -y
+yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 -y
+if grep -q "8" /etc/redhat-release; then
+    yum install -y python39-devel
+else
+    yum install -y python3-devel
+fi
 echo Downloading httpd-2.4.54
 curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz
 tar xvzf httpd-2.4.54.tar.gz
@@ -44,9 +49,13 @@ mv /usr/local/apache2/htdocs /var/www
 ln -s /var/www /usr/local/apache2/htdocs
 
 cd plugin
-curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.0.tar.gz
-tar xvzf 4.9.0.tar.gz
-cd mod_wsgi-4.9.0
-./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python3)
+curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.3.tar.gz
+tar xvzf 4.9.3.tar.gz
+cd mod_wsgi-4.9.3
+if grep -q "8" /etc/redhat-release; then
+    ./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python39)
+else
+    ./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python3)
+fi
 make -j $THREADS && make install -j $THREADS
 cd ../../
