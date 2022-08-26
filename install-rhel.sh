@@ -1,3 +1,5 @@
+THREADS=$(grep -c ^processor /proc/cpuinfo)
+
 mkdir work-apache2-inst
 cd work-apache2-inst
 rm -rf ./*
@@ -24,16 +26,16 @@ fg
 echo Installing Plugins
 cd ./apr-1.7.0
 ./configure --prefix=/usr/local/apache2
-make && make install
+make -j $THREADS && make install -j $THREADS
 cd ../apr-util-1.6.1
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
-make && make install
+make -j $THREADS && make install -j $THREADS
 cd ../../httpd-2.4.54/
 
 echo Installing HTTPD
 ./configure --prefix=/usr/local/apache2 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache2 --with-apr-util=/usr/local/apache2
-make && make install
+make -j $THREADS && make install -j $THREADS
 cd ../
 
 ln -s /usr/local/apache2/bin/httpd /usr/local/bin/httpd
@@ -46,5 +48,5 @@ curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.0.tar
 tar xvzf 4.9.0.tar.gz
 cd mod_wsgi-4.9.0
 ./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python3)
-make && make install
+make -j $THREADS && make install -j $THREADS
 cd ../../
