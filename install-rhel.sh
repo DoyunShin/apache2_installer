@@ -18,9 +18,9 @@ if grep -q "8" /etc/redhat-release; then
 else
     yum install -y python3-devel
 fi
-echo Downloading httpd-2.4.54
-curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz
-tar xvzf httpd-2.4.54.tar.gz
+echo Downloading httpd-2.4.55
+curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.55.tar.gz
+tar xvzf httpd-2.4.55.tar.gz
 
 echo Downloading plugins
 mkdir plugin
@@ -42,7 +42,7 @@ cd ../apr-util-1.6.1
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS
-cd ../../httpd-2.4.54/
+cd ../../httpd-2.4.55/
 
 echo Installing HTTPD
 ./configure --prefix=/usr/local/apache2 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache2 --with-apr-util=/usr/local/apache2
