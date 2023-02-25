@@ -25,20 +25,20 @@ tar xvzf httpd-2.4.55.tar.gz
 echo Downloading plugins
 mkdir plugin
 cd plugin
-curl -LO https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz &
-curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz
+curl -LO https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz &
+curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz
 fg
 
 echo Unzipping Plugins
-tar xvzf apr-1.7.0.tar.gz &
-tar xvzf apr-util-1.6.1.tar.gz
+tar xvzf apr-1.7.2.tar.gz &
+tar xvzf apr-util-1.6.3.tar.gz
 fg
 
 echo Installing Plugins
-cd ./apr-1.7.0
+cd ./apr-1.7.2
 ./configure --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS
-cd ../apr-util-1.6.1
+cd ../apr-util-1.6.3
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS

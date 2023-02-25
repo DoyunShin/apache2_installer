@@ -11,23 +11,23 @@ tar xvzf httpd-2.4.55.tar.gz
 mkdir plugin
 cd plugin
 curl -LO https://www.openssl.org/source/openssl-1.1.1g.tar.gz &
-curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz &
-curl -LO https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz
+curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz &
+curl -LO https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz
 
 fg
 fg
 
 tar xvzf openssl-1.1.1g.tar.gz &
-tar xvzf apr-util-1.6.1.tar.gz &
-tar xvzf apr-1.7.0.tar.gz 
+tar xvzf apr-util-1.6.3.tar.gz &
+tar xvzf apr-1.7.2.tar.gz 
 
 fg
 fg
 
-cd ./apr-1.7.0
+cd ./apr-1.7.2
 ./configure --prefix=/usr/local/apache2
 make && make install
-cd ../apr-util-1.6.1
+cd ../apr-util-1.6.3
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make && make install
