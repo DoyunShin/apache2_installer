@@ -1,5 +1,7 @@
 if [ -f /etc/redhat-release ]; then
     echo "Starting for RHEL system"
+elif [ -f /etc/debian_version ]; then
+    echo "Starting for Debian system"
 else
     echo "Unsupported OS"
     exit 1
@@ -11,28 +13,31 @@ mkdir work-apache2-inst
 cd work-apache2-inst
 rm -rf ./*
 echo Updating Build Tools / Dists
-yum groupinstall "Development Tools" -y
-yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 -y
-if grep -q "8" /etc/redhat-release; then
-    yum install -y python39-devel
-else
-    yum install -y python3-devel
+if [ -f /etc/redhat-release ]; then
+    yum groupinstall "Development Tools" -y
+    yum install curl make gcc gcc-c++ pcre-devel expat-devel zlib zlib-devel openssl-devel m4 -y
+    
+    if grep -q "8" /etc/redhat-release; then
+        yum install -y python39-devel
+    else
+        yum install -y python3-devel
+    fi
+
+elif [ -f /etc/debian_version ]; then
+    apt update
+    apt install make gcc g++ libpcre3-dev libexpat1-dev build-essential zlib1g zlib1g-dev openssl m4 python3-dev gnulib curl libssl-dev -y
 fi
-echo Downloading httpd-2.4.55
-curl -LO https://dlcdn.apache.org/httpd/httpd-2.4.55.tar.gz
-tar xvzf httpd-2.4.55.tar.gz
+
+
+echo Downloading httpd-2.4.56
+curl https://dlcdn.apache.org/httpd/httpd-2.4.56.tar.gz | tar xvz
 
 echo Downloading plugins
 mkdir plugin
 cd plugin
-curl -LO https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz &
-curl -LO https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz
-fg
 
-echo Unzipping Plugins
-tar xvzf apr-1.7.2.tar.gz &
-tar xvzf apr-util-1.6.3.tar.gz
-fg
+curl https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz | tar xvz
+curl https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz | tar xvz
 
 echo Installing Plugins
 cd ./apr-1.7.2
@@ -42,7 +47,7 @@ cd ../apr-util-1.6.3
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS
-cd ../../httpd-2.4.55/
+cd ../../httpd-2.4.56/
 
 echo Installing HTTPD
 ./configure --prefix=/usr/local/apache2 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache2 --with-apr-util=/usr/local/apache2
