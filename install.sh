@@ -60,9 +60,9 @@ mv /usr/local/apache2/htdocs /var/www
 ln -s /var/www /usr/local/apache2/htdocs
 
 cd plugin
-curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.3.tar.gz
-tar xvzf 4.9.3.tar.gz
-cd mod_wsgi-4.9.3
+curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.4.tar.gz
+tar xvzf 4.9.4.tar.gz
+cd mod_wsgi-4.9.4
 if grep -q "8" /etc/redhat-release; then
     ./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python39)
 else
