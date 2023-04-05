@@ -30,14 +30,14 @@ fi
 
 
 echo Downloading httpd-2.4.56
-curl https://dlcdn.apache.org/httpd/httpd-2.4.56.tar.gz | tar xvz
+curl -L https://dlcdn.apache.org/httpd/httpd-2.4.56.tar.gz | tar xvz
 
 echo Downloading plugins
 mkdir plugin
 cd plugin
 
-curl https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz | tar xvz
-curl https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz | tar xvz
+curl -L https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz | tar xvz
+curl -L https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz | tar xvz
 
 echo Installing Plugins
 cd ./apr-1.7.2
@@ -60,8 +60,7 @@ mv /usr/local/apache2/htdocs /var/www
 ln -s /var/www /usr/local/apache2/htdocs
 
 cd plugin
-curl -LO https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.4.tar.gz
-tar xvzf 4.9.4.tar.gz
+curl -L https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.4.tar.gz | tar xvz
 cd mod_wsgi-4.9.4
 if grep -q "8" /etc/redhat-release; then
     ./configure --with-apxs=/usr/local/apache2/bin/apxs --with-python=$(which python39)
