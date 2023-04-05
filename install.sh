@@ -36,11 +36,11 @@ echo Downloading plugins
 mkdir plugin
 cd plugin
 
-curl -L https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz | tar xvz
+curl -L https://dlcdn.apache.org//apr/apr-1.7.3.tar.gz | tar xvz
 curl -L https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz | tar xvz
 
 echo Installing Plugins
-cd ./apr-1.7.2
+cd ./apr-1.7.3
 ./configure --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS
 cd ../apr-util-1.6.3
