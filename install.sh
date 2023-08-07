@@ -36,7 +36,7 @@ echo Downloading plugins
 mkdir plugin
 cd plugin
 
-curl -L https://dlcdn.apache.org//apr/apr-1.7.3.tar.gz | tar xvz
+curl -L https://dlcdn.apache.org//apr/apr-1.7.4.tar.gz | tar xvz
 curl -L https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz | tar xvz
 
 echo Installing Plugins
