@@ -29,8 +29,8 @@ elif [ -f /etc/debian_version ]; then
 fi
 
 
-echo Downloading httpd-2.4.56
-curl -L https://dlcdn.apache.org/httpd/httpd-2.4.56.tar.gz | tar xvz
+echo Downloading httpd-2.4.57
+curl -L https://dlcdn.apache.org/httpd/httpd-2.4.57.tar.gz | tar xvz
 
 echo Downloading plugins
 mkdir plugin
@@ -47,7 +47,7 @@ cd ../apr-util-1.6.3
 
 ./configure --with-apr=/usr/local/apache2 --prefix=/usr/local/apache2
 make -j $THREADS && make install -j $THREADS
-cd ../../httpd-2.4.56/
+cd ../../httpd-2.4.57/
 
 echo Installing HTTPD
 ./configure --prefix=/usr/local/apache2 --enable-module=so --enable-mods-shared=all --enable-so --enable-deflate --enable-rewrite --enable-ssl --with-ssl --with-apr=/usr/local/apache2 --with-apr-util=/usr/local/apache2
